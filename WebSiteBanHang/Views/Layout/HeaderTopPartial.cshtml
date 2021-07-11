@@ -1,0 +1,159 @@
+﻿@using WebSiteBanHang.Models
+
+
+<link rel="stylesheet" type="text/css" href="~/Content/css/style_form_dangnhap.css" />
+<link rel="stylesheet" type="text/css" href="~/Content/css/style_form_dangky.css" />
+
+
+<div class="header-top">
+    <div class="container">
+        <div class="search">
+            <form>
+                <input type="text" value="Search " onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
+                <input type="submit" value="Go">
+            </form>
+        </div>
+        <div class="header-left">
+            <ul>
+                @if (Session["Taikhoan"] == null || Session["TaiKhoan"] == "")
+                {
+                    <li><a class="lock" href="#" id="btnDangNhap">Đăng Nhập</a></li>
+                    <li><a class="lock" href="#" id="btnDangKy">Đăng Ký</a></li>
+                    <li>
+                    </li>
+                }
+                else
+                {
+                    ThanhVien tv = Session["TaiKhoan"] as ThanhVien;
+                    <span>Chào mừng : @tv.HoTen</span>
+                    @Html.ActionLink("Đăng xuất", "DangXuat", "Home")
+                }
+
+            </ul>
+            @Html.Action("GioHangPartial", "GioHang")
+           
+            <div class="clearfix"> </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+
+
+
+@*Xây dựng form đăng ký*@
+
+
+<div class="container">
+    @*Tạo 1 div ở bên ngoài chứa div login-form*@
+
+    <div id="popup_register" style="display:none;z-index:999;position: fixed;width: 100%; height: 100%; top: 0;left: 0;background-color: rgba(0, 0, 0, 0.8);">
+        <div class="register-form" style="height:500px;height: 100%;
+    margin: 0 auto;
+    width: 500px;
+    background: brown;">
+            <div style="clear: both; text-align: right; margin-bottom: 0;">
+                <span id="close-form-register" class="btn btn-danger">X</span>
+            </div>
+            <h2>Đăng Ký</h2>
+            <div class="form-info">
+                @using (Ajax.BeginForm("DangKy", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "ThongBao" }))
+                {
+                    <div class="col-md-6 register-top-grid">
+                        <h3>Thông tin cá nhân</h3>
+                        <div class="row">
+                            <div>
+                                <span>Tài khoản</span>
+                                <input type="text" name="TaiKhoan">
+                            </div>
+                            <div>
+                                <span>Họ tên</span>
+                                <input type="text" name="HoTen">
+                            </div>
+                        </div>
+                        <div>
+                            <span>Địa chỉ</span>
+                            <input type="text" name="DiaChi">
+                        </div>
+                        <div>
+                            <span>Email</span>
+                            <input type="text" name="Email">
+                        </div>
+                        <div>
+                            <span>Số điện thoại</span>
+                            <input type="text" name="SoDienThoai">
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-6 register-bottom-grid">
+                        <h3>Login information</h3>
+                        <div>
+                            <span>Password</span>
+                            <input type="password" name="MatKhau">
+                        </div>
+                        <div>
+                            <span>Confirm Password</span>
+                            <input type="password" name="NhapLaiMatKhau">
+                        </div>
+
+
+                        <input type="submit" value="Xác nhận">
+
+                    </div>
+
+                    <h1 style="color: white;">@ViewBag.ThongBao</h1>
+                    <div class="clearfix"> </div>
+                  
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<br />
+
+<div>
+    @*Tạo 1 div ở bên ngoài chứa div login-form*@
+
+    <div id="popup_login">
+        <div class="login-form">
+            <div style="clear: both; text-align: right; margin-bottom: 0;">
+                <span id="close-form" class="btn btn-danger">X</span>
+            </div>
+            <h2>Đăng Nhập</h2>
+            <div class="form-info">
+                @using (Ajax.BeginForm("DangNhap", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "ThongBao" }))
+                {
+                    <input type="text" class="email TaiKhoan" name="txtTenDangNhap" placeholder="Tên đăng nhập" required="" />
+                    <input type="password" class="password MatKhau" name="txtMatKhau" placeholder="Mật Khẩu" required="" />
+                    <p><a href="#">Quên mật khẩu?</a></p>
+                    <h3 style="font-weight: bold;color: red" id="ThongBao"></h3>
+                    <ul class="login-buttons">
+                        <li><input type="submit" value="Đăng nhập" /></li>
+                        <li><a href="#" class="hvr-sweep-to-left">Đăng ký</a></li>
+                        <div class="clear"> </div>
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $("#btnDangNhap").click(function () {
+        $("#popup_login").show();
+    })
+    $("#close-form").click(function () {
+        $("#popup_login").hide();
+    })
+
+    $("#btnDangKy").click(function () {
+        $("#popup_register").show();
+    })
+    $("#close-form-register").click(function () {
+        $("#popup_register").hide();
+    })
+</script>

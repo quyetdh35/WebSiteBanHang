@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Demo";
+    Layout = "~/Views/Layout/HomeLayout.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/css/style_form_dangnhap.css" />
+<div style="height: 500px;">
+    <br />
+    <input type="button" value="Đăng nhập" id="btnDangNhap" class="btn btn-primary" />
+
+    @*Tạo 1 div ở bên ngoài chứa div login-form*@
+
+    <div id="popup_login">
+        <div class="login-form">
+            <div style="clear: both; text-align: right; margin-bottom: 0;">
+                <span id="close-form" class="btn btn-danger">X</span>
+            </div>
+            <h2>User Login</h2>
+            <div class="form-info">
+                <form>
+                    <input type="text" class="email" placeholder="Email Address" required="" />
+                    <input type="password" class="password" placeholder="Password" required="" />
+                    <p><a href="#">Forgot password?</a></p>
+                    <ul class="login-buttons">
+                        <li><input type="submit" value="LOGIN" /></li>
+                        <li><a href="#" class="hvr-sweep-to-left">REGISTER</a></li>
+                        <div class="clear"> </div>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $("#btnDangNhap").click(function() {
+        $("#popup_login").show();
+    })
+    $("#close-form").click(function() {
+        $("#popup_login").hide();
+    })
+</script>
+

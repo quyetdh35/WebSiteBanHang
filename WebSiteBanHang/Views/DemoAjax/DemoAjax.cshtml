@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "DemoAjax";
+    Layout = "~/Views/Layout/HomeLayout.cshtml";
+}
+
+@*Load Ajax theo cách thư 1 dùng Ajax.ActionLink*@
+@Ajax.ActionLink("Load Ajax MVC", "LoadAjaxActionLink", new AjaxOptions
+{
+    HttpMethod = "GET",
+    UpdateTargetId = "ketQua",
+    InsertionMode = InsertionMode.InsertAfter,
+    LoadingElementId = "loading"
+})
+
+
+
+
+@*Load Ajax theo cách 2 dùng Ajax.Beginform*@
+@using (Ajax.BeginForm("LoadAjaxBeginForm", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "ketQua", InsertionMode = InsertionMode.Replace, LoadingElementId = "loading" }))
+{
+    <input name="txt1" />
+    <input type="submit" value="submit" />
+}
+
+@*<input id="text1" />
+    <input id="text2" />
+    <input type="button" id="button" value="SubmitJqueryAjax" />
+    <div id="loading" style="display: none"><img src="~/Content/images/animatedTrapezoids.gif" /></div>
+    <div id="ketQua" style="height: 150px;"></div>*@
+
+@*Load Ajax theo cách thứ 3 dùng javascript Âjax*@
+@*<script>
+        $("#button").click(function () {
+            $('#loading').show();
+            var thamso1 = $("#text1").val();
+            var thamso2 = $("#text2").val();
+            $.ajax({
+                type: 'GET',
+                data: { a: thamso1, b: thamso2 },
+                url: 'LoadAjaxJquery',
+                success: function (ketqua) {
+                    $('#loading').hide();
+                    $('#ketQua').html(ketqua);
+                }
+            })
+        })
+    </script>*@
+
+
+
+
+@*Load PartialView Ajax*@
+@Ajax.ActionLink("Load Ajax MVC", "SanPhamPartial", new AjaxOptions
+{
+    HttpMethod = "GET",
+    UpdateTargetId = "ketQua",
+    InsertionMode = InsertionMode.InsertAfter,
+    LoadingElementId = "loading"
+})
+
+
+<div class="container">
+    <div class="content-top">
+        <h1>Điện Thoại</h1>
+        <div id="ketQua" style="height: 150px;">
+            Đây là kết quả
+            <br />
+        </div>
+    </div>
+</div>

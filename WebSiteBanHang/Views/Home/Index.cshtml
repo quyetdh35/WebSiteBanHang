@@ -1,0 +1,25 @@
+﻿@using WebSiteBanHang.Models
+@model IEnumerable<SanPham>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/HomeLayout.cshtml";
+}
+
+@{ 
+    IEnumerable<SanPham> lstDTMoi = ViewBag.lstDTMoi as IEnumerable<SanPham>;
+    IEnumerable<SanPham> lstLTMoi = ViewBag.lstLTMoi as IEnumerable<SanPham>;
+    IEnumerable<SanPham> lstMTBMoi = ViewBag.lstMTBMoi as IEnumerable<SanPham>;
+}
+
+<div class="container">
+    @Html.Partial("~/Views/SanPham/SanPhamStyle1Partial.cshtml", lstDTMoi);
+</div>
+
+<div class="container">
+    @Html.Partial("~/Views/SanPham/SanPhamStyle1Partial.cshtml", lstLTMoi);
+</div>
+
+<div class="container">
+    @Html.Partial("~/Views/SanPham/SanPhamStyle2Partial.cshtml", lstMTBMoi);
+</div>
+
